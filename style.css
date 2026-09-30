@@ -1,0 +1,61 @@
+:root {
+    --bg: #f4f7fb; --surface: #ffffff; --ink: #1f2937; --muted: #6b7280; --line: #e5e7eb;
+    --accent: #2563eb; --accent-hover: #1d4ed8; --pos: #16a34a; --neg: #dc2626; --row: #eef2ff;
+    --c-food: #0f766e; --c-transport: #d99a1e; --c-entertainment: #7c5cd6; --c-utilities: #3b82c4; --c-other: #8a9a96;
+}
+:root[data-theme="dark"] {
+    --bg: #0f172a; --surface: #1e293b; --ink: #e2e8f0; --muted: #94a3b8; --line: #334155;
+    --accent: #3b82f6; --accent-hover: #60a5fa; --pos: #4ade80; --neg: #f87171; --row: #26344d;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: var(--ink); }
+h1 { margin: 0; font-size: 1.4rem; } h2 { margin: 0 0 10px; font-size: 1.05rem; }
+.muted { color: var(--muted); font-size: .85rem; font-weight: 400; }
+.pos { color: var(--pos); } .neg { color: var(--neg); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 14px 24px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.month-nav, .tools { display: flex; align-items: center; gap: 6px; }
+.month-nav { margin: 0 auto; }
+.top input, .top select { width: auto; margin: 0; }
+
+input, select { width: 100%; padding: 11px 12px; margin: 6px 0; border: 1px solid var(--line); border-radius: 8px; font-size: 15px; background: var(--surface); color: var(--ink); }
+button { padding: 10px 14px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; font-size: 14px; }
+button:hover { background: var(--accent-hover); }
+button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+button.ghost:hover { border-color: var(--accent); }
+.btn-row { display: flex; gap: 8px; margin-top: 6px; }
+.edit-btn { background: var(--pos); } .delete-btn { background: var(--neg); } .cancel-btn { background: #6b7280; }
+
+.msg { margin: 0; } .msg:not(:empty) { margin: 12px 24px 0; padding: 10px 14px; border-radius: 8px; background: #fee2e2; color: #b91c1c; }
+
+.layout { display: grid; gap: 16px; padding: 16px 24px 40px; max-width: 1200px; margin: 0 auto; align-items: start; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .layout { grid-template-columns: 320px 1fr; } }
+aside, .content { display: grid; gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+
+.summary { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.stat { display: grid; gap: 4px; } .stat strong { font-size: 1.5rem; }
+#balanceCard.negative strong { color: var(--neg); }
+
+.charts { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.chart-box { position: relative; height: 230px; }
+.chart-empty { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: var(--muted); }
+.chart-empty[hidden] { display: none; }
+
+#budgetInputs label { display: flex; align-items: center; gap: 10px; }
+#budgetInputs label span { width: 110px; font-size: .9rem; }
+.bar-row { margin-bottom: 12px; }
+.bar-label { display: flex; justify-content: space-between; font-size: .88rem; margin-bottom: 4px; }
+.bar { height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.bar > div { height: 100%; background: var(--pos); border-radius: 999px; }
+.bar > div.warn { background: #d99a1e; } .bar > div.over { background: var(--neg); }
+
+.toolbar { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+ul { list-style: none; padding: 0; margin: 8px 0 0; }
+li { display: flex; align-items: center; gap: 10px; background: var(--row); padding: 10px 12px; margin: 8px 0; border-radius: 8px; flex-wrap: wrap; }
+li.empty { justify-content: center; background: none; color: var(--muted); }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; background: var(--c-other); }
+.info { flex: 1; min-width: 120px; display: grid; }
+.amount { font-weight: 700; } .actions { display: flex; gap: 6px; }
+.actions button { padding: 6px 10px; font-size: 13px; }

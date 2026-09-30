@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top">
+        <h1>Budget Tracker</h1>
+        <div class="month-nav">
+            <button type="button" id="prevMonth" class="ghost" aria-label="Previous month">&lsaquo;</button>
+            <input type="month" id="monthPicker" aria-label="Month">
+            <button type="button" id="nextMonth" class="ghost" aria-label="Next month">&rsaquo;</button>
+        </div>
+        <div class="tools">
+            <select id="currency" aria-label="Currency">
+                <option value="USD">USD $</option>
+                <option value="INR">INR ₹</option>
+                <option value="EUR">EUR €</option>
+                <option value="GBP">GBP £</option>
+            </select>
+            <button type="button" id="exportBtn" class="ghost">Export CSV</button>
+            <button type="button" id="themeBtn" class="ghost">Dark mode</button>
+        </div>
+    </header>
+
+    <p id="msg" class="msg" role="alert"></p>
+
+    <main class="layout">
+        <aside>
+            <form id="expenseForm" class="card">
+                <h2>Add expense</h2>
+                <input type="text" id="expense" placeholder="Expense name" aria-label="Expense name" maxlength="40">
+                <input type="number" id="amount" placeholder="Amount" aria-label="Expense amount" min="0" step="0.01">
+                <input type="date" id="date" aria-label="Expense date">
+                <select id="category" aria-label="Category">
+                    <option value="">Select category</option>
+                    <option>Food</option><option>Transport</option><option>Entertainment</option>
+                    <option>Utilities</option><option>Other</option>
+                </select>
+                <div class="btn-row">
+                    <button type="submit" id="saveBtn">Add expense</button>
+                    <button type="button" id="cancelBtn" class="cancel-btn" hidden>Cancel</button>
+                </div>
+            </form>
+
+            <form id="incomeForm" class="card">
+                <h2>Add income</h2>
+                <input type="text" id="incomeSource" placeholder="Income source" aria-label="Income source" maxlength="40">
+                <input type="number" id="incomeAmount" placeholder="Amount" aria-label="Income amount" min="0" step="0.01">
+                <input type="date" id="incomeDate" aria-label="Income date">
+                <button type="submit">Add income</button>
+            </form>
+
+            <section class="card">
+                <h2>Monthly budgets</h2>
+                <p class="muted">Set a limit per category. Leave empty for no limit.</p>
+                <div id="budgetInputs"></div>
+            </section>
+        </aside>
+
+        <section class="content">
+            <div class="summary">
+                <div class="card stat"><span class="muted">Income</span><strong id="incomeTotal" class="pos">0</strong></div>
+                <div class="card stat"><span class="muted">Spent</span><strong id="total" class="neg">0</strong></div>
+                <div class="card stat" id="balanceCard"><span class="muted">Balance</span><strong id="balance">0</strong></div>
+            </div>
+
+            <div class="charts">
+                <div class="card">
+                    <h2>Spending by category</h2>
+                    <div class="chart-box">
+                        <canvas id="donutChart" role="img" aria-label="Spending by category"></canvas>
+                        <p id="donutEmpty" class="chart-empty">No spending this month</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>Last 6 months</h2>
+                    <div class="chart-box"><canvas id="barChart" role="img" aria-label="Spending per month"></canvas></div>
+                </div>
+            </div>
+
+            <section class="card">
+                <h2>Budget progress</h2>
+                <div id="budgetBars"></div>
+            </section>
+
+            <section class="card">
+                <div class="head">
+                    <h2>Expenses <small id="count" class="muted"></small></h2>
+                </div>
+                <div class="toolbar">
+                    <input type="search" id="search" placeholder="Search expenses" aria-label="Search expenses">
+                    <select id="filterCategory" aria-label="Filter by category">
+                        <option value="All">All categories</option>
+                        <option>Food</option><option>Transport</option><option>Entertainment</option>
+                        <option>Utilities</option><option>Other</option>
+                    </select>
+                    <select id="sort" aria-label="Sort expenses">
+                        <option value="newest">Newest first</option>
+                        <option value="oldest">Oldest first</option>
+                        <option value="high">Highest amount</option>
+                        <option value="low">Lowest amount</option>
+                    </select>
+                </div>
+                <ul id="expenseList"></ul>
+            </section>
+
+            <section class="card">
+                <h2>Income</h2>
+                <ul id="incomeList"></ul>
+            </section>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
